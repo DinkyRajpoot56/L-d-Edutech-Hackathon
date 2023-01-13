@@ -11,6 +11,86 @@ Deep learning with Python for crack detection
 .....
 .....
 .....
+#GENERAL
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import random
+#PATH PROCESS
+import os
+import os.path
+from pathlib import Path
+import glob
+#IMAGE PROCESS
+from PIL import Image
+from keras.preprocessing import image
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import cv2
+from keras.applications.vgg16 import preprocess_input, decode_predictions
+from keras.preprocessing import image
+from skimage.feature import he
+from skimage.feature import hessian_matrix, hessian_matrix_eigvals
+from scipy.ndimage.filters import convolve
+from skimage import data, io, filters
+import skimage
+from skimage.morphology import convex_hull_image, erosion
+#SCALER & TRANSFORMATION
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from keras.utils.np_utils import to_categorical
+from sklearn.model_selection import train_test_split
+from keras import regularizers
+from sklearn.preprocessing import LabelEncoder
+#ACCURACY CONTROL
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report, roc_auc_score, roc_curve
+from sklearn.model_selecti
+from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import mean_squared_error, r2_score
+#OPTIMIZER
+from keras.optimizers import RMSprop,Adam,Optimizer,Optimizer, SGD
+#MODEL LAYERS
+from tensorflow.keras.models import Sequential
+from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D, BatchNormalization,MaxPooling2D,BatchNormalization,\
+                        Permute, TimeDistributed, Bidirectional,GRU, SimpleRNN, LSTM, GlobalAveragePooling2D, SeparableConv2D, ZeroPadding2D, C
+                        from keras import models
+from keras import layers
+import tensorflow as tf
+from keras.applications import VGG16,VGG19,inception_v3
+from keras import backend as K
+from keras.utils import plot_model
+from keras.models import load_model
+#SKLEARN CLASSIFIER
+from xgboost import XGBClassifier, XGBRegressor
+from lightgbm import LGBMClassifier, LGBMRegressor
+from catboost import CatBoostClassifier, CatBoostRegressor
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
+from sklearn.ensemble imp
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
+from sklearn.cross_decomposition import PLSRegression
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import ElasticNetCV
+#IGNORING WARNINGS
+from warnings import filterwa
+from sklearn.linear_model import LassoCV
+from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import ElasticNetCV
+#IGNORING WARNINGS
+from warnings import filterwarnings
+filterwarnings("ignore",category=DeprecationWarning)
+filterwarnings("ignore", category=FutureWarning) 
+filterwarnings("ignore", category=UserWarning)
+
 While new technologies have changed almost every aspect of our lives, the construction field seems to be struggling to catch up. Currently, the structural condition of a building is still predominantly manually inspected. In simple terms, even nowadays when a structure needs to be inspected for any damage, an engineer will manually check all the surfaces and take a bunch of photos while keeping notes of the position of any cracks. Then a few more hours need to be spent at the office to sort all the photos and notes trying to make a meaningful report out of it. Apparently this a laborious, costly, and subjective process. On top of that, safety concerns arise since there are parts of structures with access restrictions and difficult to reach. To give you an example, the Golden Gate Bridge needs to be periodically inspected. In other words, up to very recently there would be specially trained people who would climb across this picturesque structure and check every inch of it.
 
 
