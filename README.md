@@ -90,8 +90,246 @@ from warnings import filterwarnings
 filterwarnings("ignore",category=DeprecationWarning)
 filterwarnings("ignore", category=FutureWarning) 
 filterwarnings("ignore", category=UserWarning)
+PATH,LABEL,TRANSFORMATION PROCESS
+MAIN PATH
+Surface_Data = Path("../input/surface-crack-detection")
+JPG PATH
+Surface_JPG_Path = list(Surface_Data.glob(r"*/*.jpg"))
+JPG LABELS
+Surface_Labels = list(map(lambda x: os.path.split(os.path.split(x)[0])[1],Surface_JPG_Path))
+TO SERIES
+Surface_JPG_Path_Series = pd.Series(Surface_JPG_Path,name="JPG").astype(str)
+Surface_Labels_Series = pd.Series(Surface_Labels,name="CATEGORY")
+TO DATAFRAME
+Main_Surface_Data = pd.concat([Surface_JPG_Path_Series,Surface_Labels_Series],axis=1)
+print(Main_Surface_Data.head(-1))
+                                                     JPG  CATEGORY
+0      ../input/surface-crack-detection/Negative/0845...  Negative
+1      ../input/surface-crack-detection/Negative/1981...  Negative
+2      ../input/surface-crack-detection/Negative/1691...  Negative
+3      ../input/surface-crack-detection/Negative/0593...  Negative
+4      ../input/surface-crack-detection/Negative/0612...  Negative
+39995  ../input/surface-crack-detection/Positive/1231...  Positive
+39996  ../input/surface-crack-detection/Positive/1864...  Positive
+39997  ../input/surface-crack-detection/Positive/1270...  Positive
+39998  ../input/surface-crack-detection/Positive/1281...  Positive
 
-While new technologies have changed almost every aspect of our lives, the construction field seems to be struggling to catch up. Currently, the structural condition of a building is still predominantly manually inspected. In simple terms, even nowadays when a structure needs to be inspected for any damage, an engineer will manually check all the surfaces and take a bunch of photos while keeping notes of the position of any cracks. Then a few more hours need to be spent at the office to sort all the photos and notes trying to make a meaningful report out of it. Apparently this a laborious, costly, and subjective process. On top of that, safety concerns arise since there are parts of structures with access restrictions and difficult to reach. To give you an example, the Golden Gate Bridge needs to be periodically inspected. In other words, up to very recently there would be specially trained people who would climb across this picturesque structure and check every inch of it.
+[39999 rows x 2 columns]
+TO SHUFFLE
+Main_Surface_Data = Main_Surface_Data.sample(frac=1).reset_index(drop=True)
+print(Main_Surface_Data.head(-1))
+print(Main_Surface_Data.head(-1))
+                                                     JPG  CATEGORY
+0      ../input/surface-crack-detection/Positive/0874...  Positive
+1      ../input/surface-crack-detection/Positive/1392...  Positive
+2      ../input/surface-crack-detection/Positive/1256...  Positive
+3      ../input/surface-crack-
+4      ../input/surface-crack-detection/Negative/1868...  Negative
+...                                                  ...       ...
+39994  ../input/surface-crack-detection/Positive/0517...  Positive
+39995  ../input/surface-crack-detection/Negative/0490...  Negative
+39996  ../input/surface-crack-detection/Negative/0065...  Negative
+39997  ../input/surface-crack-detection/Negative/0586...  Negative
+39998  ../input/surface-crack-detection/Negative/1976...  Negative
+
+[39999 rows x 2 columns]
+VISUALIZATION
+plt.style.use("dark_background")
+LABESL
+Positive_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Positive"]
+Negative_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Negative"]
+
+Positive_Surface = Positive_Surface.reset_index()
+Negative_Surface = Negativ
+LABESL
+Positive_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Positive"]
+Negative_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Negative"]
+
+Positive_Surface = Positive_Surface.reset_index()
+Negative_Surface = Negative_Surface.reset_index()
+VISION FUNCTION
+def simple_vision(path):e_Surface.reset_index()
+VISION FUNCTION
+def simple_vision(path):
+    figure = plt.figure(figsize=(8,8))
+    
+    Reading_Img = cv2.imread(path)
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    plt.xlabel(Reading_Img.shape)
+    plt.ylabel(Reading_Img.size)
+    plt.imshow(Reading_Img)
+VISION FUNCTION
+LABESL
+Positive_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Positive"]
+Negative_Surface = Main_Surface_Data[Main_Surface_Data["CATEGORY"] == "Negative"]
+
+Positive_Surface = Positive_Surface.reset_index()
+Negative_Surface = Negative_Surface.reset_index()
+VISION FUNCTION
+def simple_vision(path):
+
+While new technologie
+VISION FUNCTION
+def simple_vision(path):
+    figure = plt.figure(figsize=(8,8))
+    
+    Reading_Img = cv2.imread(path)
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    plt.xlabel(Reading_Img.shape)
+    plt.ylabel(Reading_Img.size)
+    def canny_vision(path):
+    figure = plt.figure(figsize=(8,8))
+    
+    Reading_Img = cv2.imread(path)
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    Canny_Img = cv2.Canny(Reading_Img,90,100)
+    
+    plt.xlabel(Canny_Img.shape)
+    plt.ylabel(Canny_Img.size)
+    plt.imshow(Canny_Img)
+def threshold_vision(path):
+def threshold_vision(path):
+    figure = plt.figure(figsize=(8,8))
+    
+    Reading_Img = cv2.imread(path)
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    _,Threshold_Img = cv2.threshold(Reading_Img,130,255,cv2.THRESH_BINARY_INV)
+    
+    plt.xlabel(Threshold_Img.shape)
+    plt.ylabel(Threshold_Img.size)
+    plt.imshow(Threshold_Img)
+    def threshold_canny(path):
+    figure = plt.figure(figsize=(8,8))
+    
+    Reading_Img = cv2.imread(path)
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    _,Threshold_Img = cv2.threshold(Reading_Img,130,255,cv2.THRESH_BINARY_INV)
+    Canny_Img = cv2.Canny(Threshold_Img,90,100)
+    
+    plt.xlabel(Canny_Img.shape)
+    plt.ylabel(Canny_Img.size)
+    plt.imshow(Canny_Img)
+    ![image](https://user-images.githubusercontent.com/111672121/212279170-b2ad960e-f219-4777-8285-537e5f69dc76.png)
+simple_vision(Main_Surface_Data["JPG"][2])
+![image](https://user-images.githubusercontent.com/111672121/212279286-1ebe28f0-a5a1-41ab-bd9c-cbcaa820bd09.png)
+figure,axis = plt.subplots(4,4,figsize=(10,10))
+
+for indexing,operations in enumerate(axis.flat):
+    
+    Reading_Img = cv2.imread(Positive_Surface["JPG"][indexing])
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    operations.set_xlabel(Reading_Img.shape)
+    operations.set_ylabel(Reading_Img.size)
+    operations.imshow(Reading_Img)
+    
+plt.tight_layout()
+plt.show()
+figure,axis = plt.subplots(4,4,figsize=(10,10))
+
+for indexing,operations in enumerate(axis.flat):
+    
+    Reading_Img = cv2.imread(Negative_Surface["JPG"][indexing])
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    operations.set_xlabel(Reading_Img.shape)
+    operations.set_ylabel(Reading_Img.size)
+    operations.imshow(Reading_Img)
+    
+plt.tight_layout()
+plt.show()
+![image](https://user-images.githubusercontent.com/111672121/212279468-e682f494-48a2-4371-ad93-1dd96df9a06c.png)
+
+canny_vision(Main_Surface_Data["JPG"][4])
+![image](https://user-images.githubusercontent.com/111672121/212279591-9b2cb747-06f2-4f25-83f2-bfb4feaf66ae.png)
+canny_vision(Main_Surface_Data["JPG"][2])
+![image](https://user-images.githubusercontent.com/111672121/212279704-4da23d48-25d7-40f4-903c-bc561d8a98d4.png)
+figure,axis = plt.subplots(4,4,figsize=(10,10))
+
+for indexing,operations in enumerate(axis.flat):
+    
+    Reading_Img = cv2.imread(Positive_Surface["JPG"][indexing])
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    Canny_Img = cv2.Canny(Reading_Img,90,100)
+    
+    operations.set_xlabel(Canny_Img.shape)
+    operations.set_ylabel(Canny_Img.size)
+    operations.imshow(Canny_Img)
+    
+plt.tight_layout()
+plt.show()
+![image](https://user-images.githubusercontent.com/111672121/212279841-2cd637dd-c57a-4cd5-ae39-39e5ce89373c.png)
+
+![image](https://user-images.githubusercontent.com/111672121/212279890-03c11785-cfeb-454b-a24f-22f32cb89078.png)
+figure,axis = plt.subplots(4,4,figsize=(10,10))
+
+for indexing,operations in enumerate(axis.flat):
+    
+    Reading_Img = cv2.imread(Negative_Surface["JPG"][indexing])
+    Reading_Img = cv2.cvtColor(Reading_Img,cv2.COLOR_BGR2RGB)
+    
+    Canny_Img = cv2.Canny(Reading_Img,90,100)
+    
+    operations.set_xlabel(Canny_Img.shape)
+    operations.set_ylabel(Canny_Img.size)
+    operations.imshow(Canny_Img)
+    
+plt.tight_layout()
+plt.show()
+![image](https://user-images.githubusercontent.com/111672121/212280088-98e8a1d5-c2a1-439f-91fb-86f0eaaf9ef1.png)
+SPLITTING TRAIN AND TEST
+xTrain,xTest = train_test_split(Main_Surface_Data,train_size=0.9,shuffle=True,random_state=42)
+print(xTrain.shape)
+print(xTest.shape)
+(36000, 2)
+(4000, 2)
+IMAGE GENERATOR
+STRUCTURE
+Train_IMG_Generator = ImageDataGenerator(rescale=1./255,
+                                        rotation_range=25,
+                                        shear_range=0.5,
+                                        zoom_range=0.5,
+                                        width_shift_range=0.2,
+                                        height_shift_range=0.2,
+                                        brightness_range=[0.6,0.9],
+                                        vertical_flip=True,
+                                        validation_split=0.1)
+Test_IMG_Generator = ImageDataGenerator(r
+CALLBACKS
+Early_Stopper = tf.keras.callbacks.EarlyStopping(monitor="loss",patience=3,mode="min")
+Checkpoint_Model = tf.keras.callbacks.ModelCheckpoint(monitor="val_accuracy",
+                                                      save_best_only=True,
+                                                      save_weights_only=True,
+                                                      filepath="./modelcheck")
+                                                      Model = Sequential()
+
+Model.add(Conv2D(32,(3,3),activation="relu",input_shape=input_dim))
+Model.add(BatchNormalization())
+Model.add(MaxPooling2D((2,2),strides=2))
+
+Model.add(Conv2D(64,(3,3),activation="relu",padding="same"))
+Model.add(Dropout(0.3))
+Model.add(MaxPooling2D((2,2),strides=2))
+
+Model.add(Conv2D(128,(3,3),activation="relu",padding="same"))
+Model.add(Dropout(0.3))
+Model.add(MaxPooling2D((2,2),strides=2))
+
+Model.add(Conv2D(256,(3,3),activation="relu",padding="same"))
+Model.add(Dropout(0.3))
+Model.add(MaxPooling2D((2,2
+![image](https://user-images.githubusercontent.com/111672121/212280696-00ef2163-d5b6-4b9f-8afc-ef25cb72122a.png)
+
+plt.plot(CNN_Model.history["loss"])
+plt.plot(CNN_Model.history["val_loss"])
+plt.ylabel("LOSS")
+plt.legend()
+plt.show()
+    
+    plt.imshow(Reading_Img)s have changed almost every aspect of our lives, the construction field seems to be struggling to catch up. Currently, the structural condition of a building is still predominantly manually inspected. In simple terms, even nowadays when a structure needs to be inspected for any damage, an engineer will manually check all the surfaces and take a bunch of photos while keeping notes of the position of any cracks. Then a few more hours need to be spent at the office to sort all the photos and notes trying to make a meaningful report out of it. Apparently this a laborious, costly, and subjective process. On top of that, safety concerns arise since there are parts of structures with access restrictions and difficult to reach. To give you an example, the Golden Gate Bridge needs to be periodically inspected. In other words, up to very recently there would be specially trained people who would climb across this picturesque structure and check every inch of it.
 
 
 Golden Gate Bridge (Photo by Free-Photos on Pixabay)
